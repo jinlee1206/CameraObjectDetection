@@ -7,19 +7,99 @@
 //
 
 import UIKit
+import AVKit
+import Vision
+
+/*
+ 모델 받는 URL
+ https://developer.apple.com/kr/machine-learning/build-run-models/
+*/
+
+enum CoreMLModel {
+    
+    case ModelMobileNet
+    case ModelSqueezeNet
+    case ModelPlaces205
+    case ModelResNet50
+    
+    func getModel() -> MLModel {
+        
+        switch self {
+            
+        case .ModelMobileNet:
+            
+            return MobileNet().model
+            
+        case .ModelSqueezeNet:
+            
+            return SqueezeNet().model
+            
+        case .ModelPlaces205:
+            
+            return GoogLeNetPlaces().model
+            
+        case .ModelResNet50:
+            
+            return Resnet50().model
+    
+        }
+    }
+}
 
 class ViewController: UIViewController {
+    
+    var coreMLModel = CoreMLModel.ModelSqueezeNet
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        // Setup Camera
+        let captureSesstion = AVCaptureSession()
+        captureSesstion.sessionPreset = .photo
+    
+        guard let captureDevice = AVCaptureDevice.default(for: .video) else { return }
+        guard let input = try? AVCaptureDeviceInput(device: captureDevice) else { return }
+        
+        captureSesstion.addInput(input)
+        captureSesstion.startRunning()
+        
+        let previewLayer = AVCaptureVideoPreviewLayer(session: captureSesstion)
+        view.layer.addSublayer(previewLayer)
+        previewLayer.frame = view.frame
+        
+        let dataOutput = AVCaptureVideoDataOutput()
+        dataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
+        captureSesstion.addOutput(dataOutput)
+        
     }
+    
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+}
+
+
+//MARK:- AVCaptureVideoDataOutputSampleBufferDelegate
+extension ViewController : AVCaptureVideoDataOutputSampleBufferDelegate {
+    
+    // Notifies the delegate that a new video frame was written.
+    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        
+        guard let pixelBuffer : CVPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+        guard let model = try? VNCoreMLModel(for: coreMLModel.getModel()) else { return }
+        
+        let request = VNCoreMLRequest(model:model , completionHandler: { (req, err) in
+            
+            guard let results = req.results as? [VNClassificationObservation] else { return }
+            guard let firstObservation = results.first else { return }
+            
+            print("identifier :",firstObservation.identifier)
+            print("confidence :",firstObservation.confidence)
+            
+        })
+        
+        try? VNImageRequestHandler(cvPixelBuffer: pixelBuffer, options: [:]).perform([request])
+        
     }
-
 
 }
 
