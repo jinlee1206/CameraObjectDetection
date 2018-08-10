@@ -12,10 +12,6 @@
 		56B79B1C211D375E00E94F30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56B79B1A211D375E00E94F30 /* Main.storyboard */; };
 		56B79B1E211D375F00E94F30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56B79B1D211D375F00E94F30 /* Assets.xcassets */; };
 		56B79B21211D375F00E94F30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56B79B1F211D375F00E94F30 /* LaunchScreen.storyboard */; };
-		56B79B29211D594A00E94F30 /* SqueezeNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 56B79B28211D594A00E94F30 /* SqueezeNet.mlmodel */; };
-		56B79B2C211D5D6700E94F30 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 56B79B2B211D5D6700E94F30 /* MobileNet.mlmodel */; };
-		56B79B2E211D5D7600E94F30 /* GoogLeNetPlaces.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 56B79B2D211D5D7600E94F30 /* GoogLeNetPlaces.mlmodel */; };
-		56B79B30211D5D8800E94F30 /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 56B79B2F211D5D8800E94F30 /* Resnet50.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,10 +22,6 @@
 		56B79B1D211D375F00E94F30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56B79B20211D375F00E94F30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56B79B22211D375F00E94F30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		56B79B28211D594A00E94F30 /* SqueezeNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SqueezeNet.mlmodel; sourceTree = "<group>"; };
-		56B79B2B211D5D6700E94F30 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
-		56B79B2D211D5D7600E94F30 /* GoogLeNetPlaces.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = GoogLeNetPlaces.mlmodel; sourceTree = "<group>"; };
-		56B79B2F211D5D8800E94F30 /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,10 +68,6 @@
 		56B79B2A211D5D5500E94F30 /* MLModel */ = {
 			isa = PBXGroup;
 			children = (
-				56B79B2B211D5D6700E94F30 /* MobileNet.mlmodel */,
-				56B79B28211D594A00E94F30 /* SqueezeNet.mlmodel */,
-				56B79B2D211D5D7600E94F30 /* GoogLeNetPlaces.mlmodel */,
-				56B79B2F211D5D8800E94F30 /* Resnet50.mlmodel */,
 			);
 			path = MLModel;
 			sourceTree = "<group>";
@@ -155,11 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56B79B2C211D5D6700E94F30 /* MobileNet.mlmodel in Sources */,
-				56B79B2E211D5D7600E94F30 /* GoogLeNetPlaces.mlmodel in Sources */,
 				56B79B19211D375E00E94F30 /* ViewController.swift in Sources */,
-				56B79B29211D594A00E94F30 /* SqueezeNet.mlmodel in Sources */,
-				56B79B30211D5D8800E94F30 /* Resnet50.mlmodel in Sources */,
 				56B79B17211D375E00E94F30 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
